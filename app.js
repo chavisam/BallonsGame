@@ -1,6 +1,7 @@
-// we declare a new global variable containing an array that represents the ballons map
-// you have to add more colors into the ballonsMap array
-let ballonsMap = ['green','red','orange','blue','purple','yellow','black','pink'];
+
+let arrColors = ['green','red','orange','blue','purple','yellow','black','pink'];
+ let ballonsMap = [];
+
 
 
 const popBalloon = (position) => {
@@ -19,15 +20,22 @@ const popBalloon = (position) => {
 
 
 const render = () => {
-    
+    let balloonsNumber=document.querySelector('#balloon_input').value ;
     // convert ballons map of colors into real html balloons
-    const ballons = ballonsMap.map((color, position) => {
-        return `<div class="balloon active" id="balloon${position}" onclick="popBalloon(${position})" style="background-color: ${color}"></div>`; // <--- render each balloon
-    });
+    for (let i = 0; i < balloonsNumber; i++) {
+        //randomly adding color ballons
+        let randomNumber = Math.floor(Math.random() *(arrColors.length-1 +1 ) + 1);
+        ballonsMap.push(arrColors[randomNumber])
 
-    document.querySelector("#balloon-count").innerHTML = ballons.filter(b => b !== null).length; // <-- render the balloon count into the DOM
-    document.querySelector("#balloon-map").innerHTML = ballons.join(''); // <-- render the balloons into the DOM
-
+        const ballons = ballonsMap.map((color, position) => {
+            return `<div class="balloon active" id="balloon${position}" onclick="popBalloon(${position})" style="background-color: ${color}"></div>`; // <--- render each balloon
+        });
+    
+        document.querySelector("#balloon-count").innerHTML = ballons.filter(b => b !== null).length; // <-- render the balloon count into the DOM
+        document.querySelector("#balloon-map").innerHTML = ballons.join(''); // <-- render the balloons into the DOM
+    
+    }
+   
     
 }
 
